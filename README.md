@@ -2,3 +2,7 @@
 Game 2048.
 
 Needs C++11 to compile the C++ source code or Python3 to run the Python script.
+
+Only for Windows.
+
+Please run INSTALL.bat to compile the C++ source code.
