@@ -346,13 +346,13 @@ void Game::Run() {
   while (1) {
     inputChar = getch();
 
-    if (inputChar == 'w') {
+    if (inputChar == 'H') {
       pressUp();
-    } else if (inputChar == 's') {
+    } else if (inputChar == 'P') {
       pressDown();
-    } else if (inputChar == 'a') {
+    } else if (inputChar == 'K') {
       pressLeft();
-    } else if (inputChar == 'd') {
+    } else if (inputChar == 'M') {
       pressRight();
     }
 
