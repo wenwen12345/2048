@@ -5,13 +5,12 @@
 #include "2048.h"
 
 #include <array>
-#include <conio.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
+#include <ncurses.h>
 #include <vector>
-
 
 // Namespace Begin
 namespace Game2048 {
@@ -33,6 +32,9 @@ Game::Game() {
 ////////////////////////////////////////////////////////////////////////////////
 
 void Game::show() const {
+  initscr();
+  cbreak();
+  noecho();
   char strList[16][7];
   int idx = 0;
 
@@ -48,26 +50,26 @@ void Game::show() const {
     }
   }
 
-  system("cls");
+  clear();
 
-  printf(" ------ ------ ------ ------ \n");
-  printf("|      |      |      |      |\n");
-  printf("|%s|%s|%s|%s|\n", strList[0], strList[1], strList[2], strList[3]);
-  printf("|      |      |      |      |\n");
-  printf(" ------ ------ ------ ------ \n");
-  printf("|      |      |      |      |\n");
-  printf("|%s|%s|%s|%s|\n", strList[4], strList[5], strList[6], strList[7]);
-  printf("|      |      |      |      |\n");
-  printf(" ------ ------ ------ ------ \n");
-  printf("|      |      |      |      |\n");
-  printf("|%s|%s|%s|%s|\n", strList[8], strList[9], strList[10], strList[11]);
-  printf("|      |      |      |      |\n");
-  printf(" ------ ------ ------ ------ \n");
-  printf("|      |      |      |      |\n");
-  printf("|%s|%s|%s|%s|\n", strList[12], strList[13], strList[14], strList[15]);
-  printf("|      |      |      |      |\n");
-  printf(" ------ ------ ------ ------ \n");
-  printf("\nStep: %d\n", __stepNum);
+  printw(" ------ ------ ------ ------ \n");
+  printw("|      |      |      |      |\n");
+  printw("|%s|%s|%s|%s|\n", strList[0], strList[1], strList[2], strList[3]);
+  printw("|      |      |      |      |\n");
+  printw(" ------ ------ ------ ------ \n");
+  printw("|      |      |      |      |\n");
+  printw("|%s|%s|%s|%s|\n", strList[4], strList[5], strList[6], strList[7]);
+  printw("|      |      |      |      |\n");
+  printw(" ------ ------ ------ ------ \n");
+  printw("|      |      |      |      |\n");
+  printw("|%s|%s|%s|%s|\n", strList[8], strList[9], strList[10], strList[11]);
+  printw("|      |      |      |      |\n");
+  printw(" ------ ------ ------ ------ \n");
+  printw("|      |      |      |      |\n");
+  printw("|%s|%s|%s|%s|\n", strList[12], strList[13], strList[14], strList[15]);
+  printw("|      |      |      |      |\n");
+  printw(" ------ ------ ------ ------ \n");
+  printw("\nStep: %d\n", __stepNum);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -317,15 +319,15 @@ void Game::afterPress(const bool moveBool) {
 
   if (winCheck()) {
     show();
-    printf("\nYou Win!\n");
-    system("pause");
+    printw("\nYou Win!\n");
+    getch();
     exit(0);
   }
 
   if (loseCheck()) {
     show();
-    printf("\nYou Lose!\n");
-    system("pause");
+    printw("\nYou Lose!\n");
+    getch();
     exit(0);
   }
 }
@@ -335,25 +337,28 @@ void Game::afterPress(const bool moveBool) {
 ////////////////////////////////////////////////////////////////////////////////
 
 void Game::Run() {
+  initscr();
+  cbreak();
+  noecho();
   show();
   char inputChar;
 
   while (1) {
-    getch();
     inputChar = getch();
 
-    if (inputChar == 'H') {
+    if (inputChar == 'w') {
       pressUp();
-    } else if (inputChar == 'P') {
+    } else if (inputChar == 's') {
       pressDown();
-    } else if (inputChar == 'K') {
+    } else if (inputChar == 'a') {
       pressLeft();
-    } else if (inputChar == 'M') {
+    } else if (inputChar == 'd') {
       pressRight();
     }
 
     show();
   }
+  endwin();
 }
 
 // Namespace End
